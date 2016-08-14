@@ -25,4 +25,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function aSouscrisPro()
+    {
+        return $this->subscribedToPlan('pro', 'main');
+    }
+
+    public function hasBeenCustomer()
+    {
+        return $this->braintree_id !== null;
+    }
 }

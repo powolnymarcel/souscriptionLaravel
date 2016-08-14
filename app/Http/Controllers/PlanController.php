@@ -15,8 +15,12 @@ class PlanController extends Controller
         ]);
     }
 
-    public function montrerPlan(Plan $plan)
+    public function montrerPlan(Request $request,Plan $plan)
     {
-    return view('plans.montrer_plan')->withPlan($plan);
+        if ($request->user()->subscribedToPlan($plan->braintree_plan,'main')){
+            return redirect()->route('home');
+        }
+
+            return view('plans.montrer_plan')->withPlan($plan);
     }
 }

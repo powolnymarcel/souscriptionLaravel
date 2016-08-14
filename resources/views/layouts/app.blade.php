@@ -48,9 +48,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ route('home') }}">Home</a></li>
+                    @if (Auth::check() && !Auth::user()->subscribed('main'))
                         <li><a href="{{ route('plans.index') }}">Plans</a></li>
+                    @endif
+                    <li><a href="{{ route('cours.index') }}">Lessons</a></li>
+                    <li><a href="{{ route('lessons.pro') }}">Pro lessons</a></li>
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -64,7 +67,15 @@
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                                @if (Auth::user()->subscribed('main'))
+                                    <li><a href="{{ route('souscription.index') }}">Parametres</a></li>
+                                @endif
+
+                                @if (Auth::user()->hasBeenCustomer())
+                                    {{--<li><a href="{{ route('invoices.index') }}">Invoices</a></li>--}}
+                                @endif
+
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Deconnexion</a></li>
                             </ul>
                         </li>
                     @endif

@@ -25,5 +25,20 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/plan/{plan}', 'PlanController@montrerPlan')->name('plans.montrerPlan');
     Route::get('/braintree/token', 'BraintreeTokenController@token')->name('braintree.token');
 
+    Route::post('/souscription','SouscriptionController@creation')->name('souscription.creation');
 
+
+
+
+    Route::group(['middleware' => 'aSouscris'], function () {
+        Route::get('/lessons','CoursController@index')->name('cours.index');
+        Route::get('/souscription', 'SouscriptionController@index')->name('souscription.index');
+        Route::post('/souscription/annuler', 'SouscriptionController@annuler')->name('souscription.annuler');
+        Route::post('/souscription/reprendre', 'SouscriptionController@reprendre')->name('souscription.reprendre');
+
+        Route::group(['middleware' => 'aSouscris.pro'], function () {
+            Route::get('/lessons/pro', 'CoursController@pro')->name('lessons.pro');
+        });
+
+    });
 });

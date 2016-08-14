@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{ $plan->name }}</div>
 
                     <div class="panel-body">
-                        <form action="" method="post">
+                        <form action="{{ route('souscription.creation') }}" method="post">
                             <div id="dropin-container"></div>
                             <hr>
                             <button type="submit" class="btn btn-default hidden" id="payment-button">Payer</button>

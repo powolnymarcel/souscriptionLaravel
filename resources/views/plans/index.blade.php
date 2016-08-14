@@ -13,13 +13,15 @@
                                 <li class="list-group-item clearfix">
                                     <div class="pull-left">
                                         <h4>{{ $plan->name }}</h4>
-                                        <h4>£{{ number_format($plan->cost, 2) }}</h4>
+                                        <h4>€{{ number_format($plan->cost, 2) }}</h4>
                                         @if ($plan->description)
                                             <p>{{ $plan->description }}</p>
                                         @endif
                                     </div>
-
-                                        <a href="{{route('plans.montrerPlan',$plan->slug)}}" class="btn btn-default pull-right">Coisir</a>
+                                    <!-- subscribedToPlan  === methode Billable-->
+                                    @if (!Auth::user()->subscribedToPlan($plan->braintree_plan, 'main'))
+                                        <a href="{{ route('plans.montrerPlan', $plan->slug) }}" class="btn btn-default pull-right">Choisir</a>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
