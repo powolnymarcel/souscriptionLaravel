@@ -51,6 +51,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'aSouscris' => \App\Http\Middleware\Asouscris::class,
         'aSouscris.pro' => \App\Http\Middleware\AsouscrisPro::class,
+        'client' => \App\Http\Middleware\Client::class,
 
 
     ];

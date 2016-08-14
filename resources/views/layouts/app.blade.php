@@ -71,8 +71,8 @@
                                     <li><a href="{{ route('souscription.index') }}">Parametres</a></li>
                                 @endif
 
-                                @if (Auth::user()->hasBeenCustomer())
-                                    {{--<li><a href="{{ route('invoices.index') }}">Invoices</a></li>--}}
+                                @if (Auth::user()->aEteClient())
+                                    <li><a href="{{ route('factures.index') }}">Factures</a></li>
                                 @endif
 
                                 <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Deconnexion</a></li>

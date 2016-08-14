@@ -11,6 +11,18 @@
 |
 */
 
+
+//$http = new \Braintree\Http(\Braintree\Configuration::$global);
+//$path = \Braintree\Configuration::$global->merchantPath() . '/transactions/522jqk56/settle';
+//$http->put($path);
+//
+//die();
+
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,10 +47,20 @@ Route::group(['middleware'=>'auth'],function(){
         Route::get('/souscription', 'SouscriptionController@index')->name('souscription.index');
         Route::post('/souscription/annuler', 'SouscriptionController@annuler')->name('souscription.annuler');
         Route::post('/souscription/reprendre', 'SouscriptionController@reprendre')->name('souscription.reprendre');
-
-        Route::group(['middleware' => 'aSouscris.pro'], function () {
-            Route::get('/lessons/pro', 'CoursController@pro')->name('lessons.pro');
-        });
-
     });
+
+    Route::group(['middleware' => 'aSouscris.pro'], function () {
+        Route::get('/lessons/pro', 'CoursController@pro')->name('lessons.pro');
+    });
+
+    Route::get('/factures', 'FactureController@index')->name('factures.index');
+
+
+    Route::group(['middleware' => 'client'], function () {
+        Route::get('/factures', 'FactureController@index')->name('factures.index');
+        Route::get('/factures/{factureId}', 'FactureController@show')->name('factures.show');
+    });
+
 });
+
+Route::post('/webhook/braintree', 'BraintreeWebhookController@handleWebhook');

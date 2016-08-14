@@ -31,8 +31,9 @@ class User extends Authenticatable
         return $this->subscribedToPlan('pro', 'main');
     }
 
-    public function hasBeenCustomer()
+    public function aEteClient()
     {
         return $this->braintree_id !== null;
     }
+
 }
